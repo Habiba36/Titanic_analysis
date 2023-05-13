@@ -132,35 +132,6 @@ def anomaly_detection():
     plt.scatter(x[:, 0], x[:, 1])
     plt.scatter(values[:, 0], values[:, 1], color='r')
     plt.show()
-    #data = pd.read_csv('titanic.csv')
-    # data.info()
-    # data.drop('Cabin', axis=1, inplace=True)
-    # data.dropna(axis=0, subset=['Embarked'], inplace=True)  # axis = 0;deletes row, =1 deletes col
-    # data['Age'].fillna(math.trunc(data['Age'].mean()), inplace=True)
-    # data.to_csv('titanic_modified.csv', index=False)
-    # data.info()
-   #  data = pd.read_csv("titanic_modified.csv")
-   #  broken_dataset = data.copy()
-   #  #random.seed(7)
-   # # data, _ = make_blobs(n_samples=300, centers=1, cluster_std=0.3, center_box=(20, 5))
-   #  plt.scatter(broken_dataset[:,0], broken_dataset[:,1])
-   # # calculate the distance from each point to its closest neighbour
-   #  neigh = NearestNeighbors(n_neighbors=2)
-   #  nbrs = neigh.fit(broken_dataset)
-   #  distances, indices = nbrs.kneighbors(broken_dataset)
-   #  distances = np.sort(distances, axis=0)
-   #  distances = distances[:, 1]
-   #  # plt.plot(distances)
-   #  dbscan = DBSCAN(eps=0.18, min_samples=10)
-   #  print(dbscan)
-   #  pred = dbscan.fit_predict(broken_dataset)
-   #  anom_index = where(pred == -1)
-   #  values = broken_dataset[anom_index]
-   #  plt.scatter(broken_dataset[:, 0], broken_dataset[:, 1])
-   #  plt.scatter(values[:, 0], values[:, 1], color='r')
-   #  plt.show()
-
-
 def predictive_analytics_decision_tree():
     data = pd.read_csv('titanic_modified.csv')
     data['Sex'] = data.Sex.replace({'male': 0, 'female': 1})
@@ -194,148 +165,6 @@ def predictive_analytics_knn():
 
     for index in range(len(predictions)):
         print('Actual: ', y[index], '  ', 'Predicted :', predictions[index], '  ', 'Weight', x[index, 0])
-
-
-def printing_sentences_in_lowercase():
-    # Converting the words of each sentence to a lowercase words and printing it
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    for sentence in sentences:
-        sentence = sentence.lower()
-        print(sentence)
-
-
-def printing_sentences_in_uppercase():
-    # Converting the words of each sentence to uppercase words and printing it
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    for sentence in sentences:
-        sentence = sentence.upper()
-        print(sentence)
-
-
-def removing_punctuation_in_each_sentence():
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
-    for sentence in sentences:
-        print("\nBefore removing punctuation: "+sentence)
-        for word in sentence:
-            if word in punctuations:
-                sentence = sentence.replace(word, "")
-        print("After removing punctuation: " + sentence)
-
-
-# Tokenizing Sentences (used in different functions)
-def tokenizing_sentences():
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    tokenized_sentences = []
-    for sentence in sentences:
-        sentence = sentence.lower()
-        sentence_words = word_tokenize(sentence)
-        tokenized_sentences.append(sentence_words)
-    return tokenized_sentences
-
-
-def print_tokenized_sentences():
-    tokenized_sentences = tokenizing_sentences()
-    for tokenized_sentence in tokenized_sentences:
-        print(tokenized_sentence)
-
-
-def removing_stopwords():
-    # gets the stop words found in english in a set
-    stops = set(stopwords.words('english'))
-    tokenized_sentences = tokenizing_sentences()
-    # Removes the stop words found in a sentence and printing the words in a list without the stop words
-    for sentence in tokenized_sentences:
-        print("\nBefore removing stop words: ", sentence)
-        for word in sentence:
-            if word in stops:
-                sentence.remove(word)
-        print("After removing stop words: ", sentence)
-
-
-def stemming_words_in_each_sentence():
-    stemmer = PorterStemmer()
-    tokenized_sentences = tokenizing_sentences()
-
-    for sentenceWords in tokenized_sentences:
-        stemmed_sentence = []
-        print("\nwords before stemming: ", sentenceWords)
-        for word in sentenceWords:
-            stemmed_sentence.append(stemmer.stem(word))
-        print("words after stemming: ", stemmed_sentence)
-
-
-def lemmatizing_words_in_each_sentence():
-    lemmatizer = WordNetLemmatizer()
-    tokenized_sentences = tokenizing_sentences()
-
-    for sentence in tokenized_sentences:
-        lemmatized_sentence = []
-        print("\nwords before lemmatization: ", sentence)
-        for word in sentence:
-            lemmatized_sentence.append(lemmatizer.lemmatize(word))
-        print("words after lemmatization: ", lemmatized_sentence)
-
-
-def sentiment_analysis():
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    from nltk.sentiment import SentimentIntensityAnalyzer
-    sia = SentimentIntensityAnalyzer()
-    for sentence in sentences:
-        print('\n'+sentence)
-        print(sia.polarity_scores(sentence))
-
-
-def classification():
-    # Getting the Sentences from the excel file
-    data = pd.read_csv('TextDataset.csv')
-    # Adding all the sentences to a list
-    sentences = list(data['text'])
-    train = [("what an amazing weather", 'pos'),
-             ("this is an amazing idea!", 'pos'),
-             ("I feel very good about these ideas.", 'pos'),
-             ("what an awesome view", 'pos'),
-             ("I really like the zoom app cause it allows us to be there for each other in a time like now when many things Are uncertain.", 'pos'),
-             ("this is my best performance.", 'pos'),
-             ('Great sacrament meeting. I am very grateful for this opportunity to listen from home occasionally.', 'pos'),
-             ('I like it because you can have a host and share your screen and you can do cool thing.', 'pos'),
-             ('Well, we walk and fly on the shoulders of Giants!', 'pos'),
-             ('I do not like this place', 'neg'),
-             ('I am tired of this stuff.', 'neg'),
-             ('The speaker was hard to understand at times because of glitches.', 'neg'),
-             ('I can\'t deal with all this tension', 'neg'),
-             ('he is my sworn enemy!', 'neg'),
-             ('my friends are horrible', 'neg'),
-             ]
-    test = [
-        ("i cannot download the app.customer support can’t even help.", "neg"),
-        ("could you please help to fix it.thank you for your help.", "pos"),
-        ("trying to join zoom is more difficult than it should be.", "neg"),
-        ("this is a great resource conference", "pos"),
-        ("very clear reception with great sound!", "pos"),
-    ]
-  #  c1 = NaiveBayesClassifier(train)
-    for sentence in sentences:
-        print("\n"+sentence)
-  #      print("Classified: "+c1.classify(sentence))
-   # print("\nClassification Accuracy: ", c1.accuracy(test))
-
-
 def main_function():
     available_functions = [
         '1- Describing the dataset attributes.',
@@ -344,22 +173,12 @@ def main_function():
         '4- Anomaly Detection (Finding Outliers).',
         '5-  Predictive Analytic (Decision Tree).',
         '6-  Predictive Analytic (KNN).',
-        '7- Printing words in each sentence in lowercase.',
-        '8- Change words in each sentence in uppercase.',
-        '9- Remove punctuations in each sentence.',
-        '10- Tokenizing each Sentence.',
-        '11- Removing stop words.',
-        '12- Stem words in each sentence.',
-        '13- Lemmatize words in each sentence.',
-        '14- Sentiment analysis',
-        '15- Classification',
-        '16- Exit Program.',
     ]
     for function in available_functions:
         print(function)
 
     function_number = int(input())
-    if 1 <= function_number <= 16:
+    if 1 <= function_number <= 6:
         return function_number
     else:
         print("*****Please enter a valid number*****")
@@ -381,24 +200,7 @@ while not functionNumber == 16:
         predictive_analytics_decision_tree()
     elif functionNumber == 6:
         predictive_analytics_knn()
-    if functionNumber == 7:
-        printing_sentences_in_lowercase()
-    elif functionNumber == 8:
-        printing_sentences_in_uppercase()
-    elif functionNumber == 9:
-        removing_punctuation_in_each_sentence()
-    elif functionNumber == 10:
-        print_tokenized_sentences()
-    elif functionNumber == 11:
-        removing_stopwords()
-    elif functionNumber == 12:
-        stemming_words_in_each_sentence()
-    elif functionNumber == 13:
-        lemmatizing_words_in_each_sentence()
-    elif functionNumber == 14:
-        sentiment_analysis()
-    elif functionNumber == 15:
-        classification()
+    
     print('\n\n')
     functionNumber = main_function()
 
