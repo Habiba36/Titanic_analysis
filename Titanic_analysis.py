@@ -173,12 +173,13 @@ def main_function():
         '4- Anomaly Detection (Finding Outliers).',
         '5-  Predictive Analytic (Decision Tree).',
         '6-  Predictive Analytic (KNN).',
+        '7- Exit Program.',
     ]
     for function in available_functions:
         print(function)
 
     function_number = int(input())
-    if 1 <= function_number <= 6:
+    if 1 <= function_number <= 7:
         return function_number
     else:
         print("*****Please enter a valid number*****")
@@ -187,7 +188,7 @@ def main_function():
 
 functionNumber = main_function()
 
-while not functionNumber == 16:
+while not functionNumber == 7:
     if functionNumber == 1:
         describing_dateset_attributes()
     elif functionNumber == 2:
